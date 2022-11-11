@@ -1,0 +1,117 @@
+.myheader{
+	display: flex;
+}
+.websitename{
+	background: #fff;
+	width: 100%;
+	color: dodgerblue;
+}
+.headerdetails{
+	width: 100%;
+}
+.navbar{
+	float: right;
+
+}
+.navbar a{
+  	 text-decoration: none;
+  	 font-size: 22px;
+  	 padding: 4px 6px;
+  	 border-top-left-radius: 5px;
+  	 border-top-right-radius: 5px;
+  	 transition: 1s ease;
+
+}
+.navbar a:hover {
+  	background: dodgerblue;
+  	color: white;
+
+}
+.form-holder{
+	padding: 16px;
+}
+.center-card{
+	width: 50%;
+	margin-left: 25%;
+	padding: 16px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+}
+.myinput{
+	width: 50%;
+	padding: 6px 8px;
+	margin-top: 16px;
+	outline: none;
+	border-radius: 10px;
+	border-bottom: solid dodgerblue 2px;
+}
+.loginbutton{
+	width: 50%;
+	background: #00000000;
+	color: dodgerblue;
+	outline: 2px solid dodgerblue;
+	padding: 4px 6px;
+	font-size: 18px;
+	border-radius: 10px;
+	transition: 0.8s ease;
+	border: none;
+}
+.loginbutton:hover{
+	width: 50%;
+	background: dodgerblue;
+	color: #fff;
+	outline: none;
+	padding: 4px 6px;
+	font-size: 18px;
+	border-radius: 10px;
+	transition: 0.8s ease;
+	cursor: pointer;
+}
+.createaccountbutton{
+	width: 50%;
+	background: #00000000;
+	color: dodgerblue;
+	outline: none;
+	padding: 4px 6px;
+	font-size: 18px;
+	border: none;
+	float: right;
+	cursor: pointer;
+
+}
+.forgotpasswordbutton{
+	width: 50%;
+	background: #00000000;
+	color: dodgerblue;
+	outline: none;
+	padding: 4px 6px;
+	font-size: 18px;
+	border: none;
+	float: left;
+	cursor: pointer;
+
+}
+.footer{
+	background: dodgerblue;
+	padding-top: 16px;
+	padding-bottom: 16px;
+	bottom: 0;
+	position: fixed;
+	align-items: center;
+	align-content: center;
+	margin-bottom: 0px;
+	width: 99%;
+}
+#registrationform{
+ display: none;
+}
+
+@media (max-width: 800px){
+	.center-card{
+	width: 100%;
+	margin-left: 0;
+	padding: 16px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+}
+}

@@ -1,0 +1,47 @@
+.idupload{
+  background: #D7E5F0;
+  width: 50%;
+  margin-left: 25%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.uploadbtn{
+  width: 100%;
+  padding: 6px 8px;
+  outline: none;
+  border: none;
+  background: dodgerblue;
+  font-size: 22px;
+  cursor: pointer;
+}
+.browserbtn{
+  width: 90%;
+  padding: 6px 8px;
+  outline: none;
+  border: none;
+}
+.mylabel{
+  color: dodgerblue;
+  font-size: 20px;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: dodgerblue;
+  color: black;
