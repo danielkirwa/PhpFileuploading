@@ -21,13 +21,28 @@
     VALUES ('{$FNAME}', '{$LNAME}', '$EMAIL',1)";
 
     if ($conn->query($sql) === TRUE) {
-      echo "Account created successfully";
+      //echo "Account created successfully";
 
        $sqllogin = "INSERT INTO tblusers (USERNAME, PASSWORD, PRIVILLAGE)
     VALUES ('{$EMAIL}', '{$PASSWORD}', '$PRIVILLAGE')";
 
     if ($conn->query($sqllogin) === TRUE) {
       echo "Account created successfully";
+         // start
+
+  $sqlsubmit = "INSERT INTO tblsubmision (ID,NATIONALID, KRAPIN, PERMIT)
+    VALUES ('$EMAIL',0, 0, 0)";
+
+    if ($conn->query($sqlsubmit) === TRUE) {
+      echo "Account created successfully";
+    } else {
+      echo "Error: " . $sqlsubmit . "<br>" . $conn->error;
+    }
+
+
+
+      //end
+
     } else {
       echo "Error: " . $sqllogin . "<br>" . $conn->error;
     }

@@ -35,12 +35,25 @@ if ($_SESSION['username']) {
       }
       
       if($file_size > 8097152){
-         $errors[]='File size must be excately 8 MB';
+         $errors[]='File size must be less than 8 MB';
       }
       
       if(empty($errors)==true){
          move_uploaded_file($file_tmp,"documents/".$file_name);
          echo "Success";
+    // update insert path to database
+    $sqlsubmitid = "INSERT INTO tblsubmision (ID,NATIONALID, KRAPIN, PERMIT)
+    VALUES ('$EMAIL',0, 0, 0)";
+
+    if ($conn->query($sqlsubmitid) === TRUE) {
+      echo "Account created successfully";
+    } else {
+      echo "Error: " . $sqlsubmit . "<br>" . $conn->error;
+    }
+
+
+   // end of insert
+
       }else{
          print_r($errors);
       }
@@ -63,7 +76,7 @@ if ($_SESSION['username']) {
       }
       
       if($file_size > 8097152){
-         $errors[]='File size must be excately 8 MB';
+         $errors[]='File size must be less than 8 MB';
       }
       
       if(empty($errors)==true){
@@ -102,6 +115,23 @@ if ($_SESSION['username']) {
       }
    }
 ?>
+
+<?php 
+    $selectsubmission = "SELECT NATIONALID, KRAPIN, PERMIT FROM tblsubmision WHERE ID='$currentUser'";
+
+    $result = $conn->query($selectsubmission);
+                if ($result->num_rows > 0) {
+              // output data of each row
+              if($row = $result->fetch_assoc()) {
+               $IDstatus = $row["NATIONALID"];
+               $KRAstatus = $row['KRAPIN'];
+               $PERMITstatus = $row['PERMIT'];
+
+              }
+           }else{
+              echo "<script>alert('Account error contact admin');</script>";
+            }
+ ?>
 
 <!DOCTYPE html>
 <html>
@@ -186,7 +216,16 @@ if ($_SESSION['username']) {
   <tr>
     <th>Serial</th>
     <th>Document</th>
-    <th>Status</th>
+    <th>
+       <?php 
+        if ( $IDstatus == 0) {
+           // code...
+         echo "Not Submited";
+        }else{
+         echo "Submited";
+        }
+        ?>
+    </th>
   </tr>
   <tr>
     <td>1</td>
@@ -196,12 +235,31 @@ if ($_SESSION['username']) {
   <tr>
     <td>2</td>
     <td>KRA PIN</td>
-    <td>Not Submitted</td>
+    <td>
+       
+       <?php 
+        if ( $KRAstatus == 0) {
+           // code...
+         echo "Not Submited";
+        }else{
+         echo "Submited";
+        }
+        ?>
+    </td>
   </tr>
   <tr>
     <td>3</td>
     <td>Business Permit</td>
-    <td>Not Submitted</td>
+    <td>
+       <?php 
+        if ( $PERMITstatus == 0) {
+           // code...
+         echo "Not Submited";
+        }else{
+         echo "Submited";
+        }
+        ?>
+    </td>
   </tr>
  
 </table>
