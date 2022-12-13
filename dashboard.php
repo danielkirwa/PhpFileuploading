@@ -39,20 +39,33 @@ if ($_SESSION['username']) {
       }
       
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"documents/".$file_name);
-         echo "Success";
+         move_uploaded_file($file_tmp,"documents/".$currentUser.$file_name);
+         $IDpath = "documents/".$currentUser.$file_name;
     // update insert path to database
-    $sqlsubmitid = "INSERT INTO tblsubmision (ID,NATIONALID, KRAPIN, PERMIT)
-    VALUES ('$EMAIL',0, 0, 0)";
+   
+        $sqlupdatepending = "UPDATE tbldocuments SET NATIONALID = '$IDpath' , STATUS = 1 WHERE ID = '{$currentUser}' ";
 
-    if ($conn->query($sqlsubmitid) === TRUE) {
-      echo "Account created successfully";
-    } else {
-      echo "Error: " . $sqlsubmit . "<br>" . $conn->error;
-    }
+           if ($conn->query($sqlupdatepending) === TRUE) {
+           // update status
+             $sqlupdatestatus = "UPDATE tblsubmision SET NATIONALID = 1  WHERE ID = '{$currentUser}' ";
+
+           if ($conn->query($sqlupdatestatus) === TRUE) {
+            echo "<script>alert('ID submited successfully');</script>";
+           } else {
+           echo "Error uploading ID: " . $conn->error;
+          
+           }
+           // end of update status
+           } else {
+           echo "Error uploading ID: " . $conn->error;
+          
+           }           
+
+          
 
 
-   // end of insert
+
+   // end of update insert
 
       }else{
          print_r($errors);
@@ -119,17 +132,17 @@ if ($_SESSION['username']) {
 <?php 
     $selectsubmission = "SELECT NATIONALID, KRAPIN, PERMIT FROM tblsubmision WHERE ID='$currentUser'";
 
-    $result = $conn->query($selectsubmission);
-                if ($result->num_rows > 0) {
+    $resultselectsubmission = $conn->query($selectsubmission);
+                if ($resultselectsubmission->num_rows > 0) {
               // output data of each row
-              if($row = $result->fetch_assoc()) {
+              if($row = $resultselectsubmission->fetch_assoc()) {
                $IDstatus = $row["NATIONALID"];
                $KRAstatus = $row['KRAPIN'];
                $PERMITstatus = $row['PERMIT'];
 
               }
            }else{
-              echo "<script>alert('Account error contact admin');</script>";
+              echo "Kindly Reload";
             }
  ?>
 
@@ -216,21 +229,19 @@ if ($_SESSION['username']) {
   <tr>
     <th>Serial</th>
     <th>Document</th>
-    <th>
-       <?php 
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>National ID</td>
+    <td><?php 
         if ( $IDstatus == 0) {
            // code...
          echo "Not Submited";
         }else{
          echo "Submited";
         }
-        ?>
-    </th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>National ID</td>
-    <td>Not submitted</td>
+        ?></td>
   </tr>
   <tr>
     <td>2</td>

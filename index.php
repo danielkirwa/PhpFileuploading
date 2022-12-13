@@ -2,7 +2,7 @@
   require_once('connection.php');
  ?>
  <?php 
-
+    $defaultpath = "documents";
         if(isset($_POST['createaccount'])){
             if($_POST['firstname'] != "" && $_POST['email'] != "" && $_POST['password'] != ""){
            $PASSWORD = md5($_POST['password']);
@@ -34,7 +34,23 @@
     VALUES ('$EMAIL',0, 0, 0)";
 
     if ($conn->query($sqlsubmit) === TRUE) {
+      
+         // insert file path
+            $sqlsubmitpath = "INSERT INTO tbldocuments (ID,KRAPIN, BUSINESSPERMIT, NATIONALID,STATUS)
+    VALUES ('$EMAIL','$defaultpath', '$defaultpath','$defaultpath', 0)";
+
+    if ($conn->query($sqlsubmitpath) === TRUE) {
       echo "Account created successfully";
+    } else {
+      echo "Error: " . $sqlsubmitpath . "<br>" . $conn->error;
+    }
+
+ 
+
+
+        // end of file path
+
+
     } else {
       echo "Error: " . $sqlsubmit . "<br>" . $conn->error;
     }
