@@ -93,8 +93,37 @@ if ($_SESSION['username']) {
       }
       
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"documents/".$file_name);
-         echo "Success";
+         move_uploaded_file($file_tmp,"documents/".$currentUser.$file_name);
+         
+       $IDpath = "documents/".$currentUser.$file_name;
+    // update insert path to database
+   
+        $sqlupdatepending = "UPDATE tbldocuments SET KRAPIN = '$IDpath' , STATUS = 1 WHERE ID = '{$currentUser}' ";
+
+           if ($conn->query($sqlupdatepending) === TRUE) {
+           // update status
+             $sqlupdatestatus = "UPDATE tblsubmision SET KRAPIN = 1  WHERE ID = '{$currentUser}' ";
+
+           if ($conn->query($sqlupdatestatus) === TRUE) {
+            echo "<script>alert('KRA submited successfully');</script>";
+           } else {
+           echo "Error uploading KRA: " . $conn->error;
+          
+           }
+           // end of update status
+           } else {
+           echo "Error uploading KRA: " . $conn->error;
+          
+           }           
+
+          
+
+
+
+   // end of update insert
+
+
+
       }else{
          print_r($errors);
       }
@@ -121,10 +150,41 @@ if ($_SESSION['username']) {
       }
       
       if(empty($errors)==true){
-         move_uploaded_file($file_tmp,"documents/".$file_name);
-         echo "Success";
+         move_uploaded_file($file_tmp,"documents/".$currentUser.$file_name);
+         
+             
+       $IDpath = "documents/".$currentUser.$file_name;
+    // update insert path to database
+   
+        $sqlupdatepending = "UPDATE tbldocuments SET BUSINESSPERMIT = '$IDpath' , STATUS = 1 WHERE ID = '{$currentUser}' ";
+
+           if ($conn->query($sqlupdatepending) === TRUE) {
+           // update status
+             $sqlupdatestatus = "UPDATE tblsubmision SET PERMIT = 1  WHERE ID = '{$currentUser}' ";
+
+           if ($conn->query($sqlupdatestatus) === TRUE) {
+            echo "<script>alert('PERMIT submited successfully');</script>";
+           } else {
+           echo "Error uploading PERMIT: " . $conn->error;
+          
+           }
+           // end of update status
+           } else {
+           echo "Error uploading PERMIT: " . $conn->error;
+          
+           }           
+
+          
+
+
+
+   // end of update insert
+
+
+
       }else{
          print_r($errors);
+
       }
    }
 ?>
